@@ -1,5 +1,19 @@
+mod flask;
+mod helpers;
+
+
+use flask::flask_init;
+use helpers::collect_user_arguments;
+use helpers::check_if_arguments_count_valid;
+
+
 fn main() {
-    print!("Hello world")
-    let mut project_name = "jedi"
-    flask_init(project_name)
+    let args: Vec<String> = collect_user_arguments();
+
+    if check_if_arguments_count_valid(&args) {
+        let project_name = &args[1];
+        flask_init(project_name.to_string());
+    
+    }
+
 }
