@@ -1,0 +1,9 @@
+[package]
+name = "flaskinit" # the name of the package
+version = "0.0.1"    # the current version, obeying semver
+authors = ["Soham Kulkarni <sohamkulkarns9@gmail.com"]
+
+[[bin]]
+edition = "2021"
+name = "flaskinit"
+path = "src/main.rs"
