@@ -5,7 +5,6 @@ use crate::helpers::create_file_and_write;
 use crate::helpers::get_app_content;
 use crate::helpers::get_init_content;
 use crate::helpers::get_route_content;
-use crate::helpers::convert_pb_to_str;
 
 use std::path::PathBuf;
 trait Create {
@@ -55,21 +54,29 @@ impl Create for FlaskProject {
     }
 
     fn create_python_files(&self) {
-        print!("Populating files");
+        println!("Populating files");
         let mut init_path = PathBuf::new();
         init_path.push(self.project_dir.to_string());
+        
+        init_path.push(&self.name);
+        init_path.push("__init__.py");
+        // println!("Init Path is {}",init_path.display() );
+        println!("Init Path is {}",init_path.display() );
+
         create_file_and_write(&init_path.into_os_string().into_string().unwrap(), get_init_content(self.name.clone()).as_bytes());
 
         let mut route_path = PathBuf::new();
         route_path.push(self.project_dir.to_string());
+        route_path.push(&self.name);
         route_path.push("routes");
-        create_file_and_write(&route_path.into_os_string().into_string().unwrap(), get_init_content(self.name.clone()).as_bytes());
+        route_path.push("hello.py");
+        create_file_and_write(&route_path.into_os_string().into_string().unwrap(), get_route_content(self.name.clone()).as_bytes());
 
 
         let mut app_path = PathBuf::new();
-        app_path.push(self.current_dir.to_string());
-        app_path.push(&self.name);
-        create_file_and_write(&app_path.into_os_string().into_string().unwrap(), get_init_content(self.name.clone()).as_bytes());
+        app_path.push(self.project_dir.to_string());
+        app_path.push("app.py");
+        create_file_and_write(&app_path.into_os_string().into_string().unwrap(), get_app_content(self.name.clone()).as_bytes());
 
     }
 

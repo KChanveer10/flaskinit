@@ -1,7 +1,5 @@
 use std::env;
-use std::fmt::format;
 use std::fs;
-use std::path::PathBuf;
 
 
 pub fn get_current_working_dir() -> String {
@@ -69,8 +67,4 @@ pub fn get_app_content(project_name: String) -> String{
         , project_name
     );
     return app_content
-}
-// this is incorrec implenetation
-pub fn convert_pb_to_str(path: PathBuf) -> String{
-    return path.into_os_string().into_string().unwrap();
 }
